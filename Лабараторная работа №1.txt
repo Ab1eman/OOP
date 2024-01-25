@@ -1,0 +1,133 @@
+#include <iostream>
+
+using namespace std;
+
+double power(double n, int p);
+float power(float n, short int p);
+long int power(char n, long int p);
+
+
+int main() {
+
+	int index;
+	metka:
+	cout << "what datatype do you want?\n"
+		<< "1 - double, int\n"
+		<< "2 - float, short int\n"
+		<< "3 - char, long int\n"
+		<< "0 - exit\n";
+	cin >> index;
+	switch (index)
+	{
+	case 0: 
+	{
+		return 0;
+	}
+	case 1:
+	{
+		double n;
+		int p;
+		bool f = 0;
+
+		cout << "input n:\n";
+		cin >> n;
+
+		cout << "Want you to input the p? (1 - yes, 0 - no);\n";
+		cin >> f;
+
+		if (f) {
+			cout << "Input the p\n";
+			cin >> p;
+		}
+		else p = 2;
+
+		if (p < 0) p = 2;
+
+		cout << n << "^" << p << " = " << power(n, p);
+
+		break;
+	}
+	case 2:
+	{
+		float n;
+		short int p;
+		bool f = 0;
+
+		cout << "input n:\n";
+		cin >> n;
+
+		cout << "Want you to input the p? (1 - yes, 0 - no);\n";
+		cin >> f;
+
+		if (f) {
+			cout << "Input the p\n";
+			cin >> p;
+		}
+		else p = 2;
+
+		if (p < 0) p = 2;
+
+		cout << n << "^" << p << " = " << power(n, p);
+		break;
+	}
+	case 3:
+	{
+		char n;
+		long int p;
+		bool f = 0;
+
+		cout << "input n:\n";
+		cin >> n;
+
+		cout << "Want you to input the p? (1 - yes, 0 - no);\n";
+		cin >> f;
+
+		if (f) {
+			cout << "Input the p\n";
+			cin >> p;
+		}
+		else p = 2;
+
+		if (p < 0) p = 2;
+		
+		cout << n << " = " << (int)n << endl;
+		cout << n << "^" << p << " = " << power(n, p);
+		break;
+	}
+	default:
+		cout << "input valid number\n";
+		goto metka;
+	}
+
+	return 0;
+}
+
+double power(double n, int p = 2) {
+
+	double prod = 1;
+	for (int i = 0; i < p; i++) {
+		prod *= n;
+	}
+
+	return prod;
+}
+
+float power(float n, short int p = 2) {
+	float prod = 1;
+	for (short int i = 0; i < p; i++) {
+		prod *= n;
+	}
+
+	return prod;
+}
+
+long int power(char n, long int p) {
+	float prod = 1;
+	for (short int i = 0; i < p; i++) {
+		prod *= (int)n;
+	}
+
+	return prod;
+
+}
+
