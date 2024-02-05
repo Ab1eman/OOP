@@ -1,0 +1,64 @@
+#include <iostream>
+
+using namespace std;
+
+// Определение структуры Aeroflot
+class Aeroflot {
+public:
+    int flightNumber;
+    string departureCity;
+    string destinationCity;
+    string arrivalTime;
+    string departureTime;
+    int registrationSectionNumber;
+};
+
+int main() {
+    setlocale(LC_ALL, "rus");
+    const int MAX_FLIGHTS = 5;
+    Aeroflot flights[MAX_FLIGHTS];
+
+
+    for (int i = 0; i < MAX_FLIGHTS; ++i) {
+        cout << "Введите информацию о рейсе #" << i + 1 << endl;
+        cout << "Введите номер рейса: ";
+        cin >> flights[i].flightNumber;
+        cout << "Введите название пункта отправления: ";
+        cin >> flights[i].departureCity;
+        cout << "Введите название пункта назначения: ";
+        cin >> flights[i].destinationCity;
+        cout << "Введите время прибытия: ";
+        cin >> flights[i].arrivalTime;
+        cout << "Введите время отправления: ";
+        cin >> flights[i].departureTime;
+        cout << "Введите номер секции для регистрации: ";
+        cin >> flights[i].registrationSectionNumber;
+    }
+
+
+    for (int i = 0; i < MAX_FLIGHTS - 1; ++i) {
+        for (int j = 0; j < MAX_FLIGHTS - i - 1; ++j) {
+            if (flights[j].destinationCity > flights[j + 1].destinationCity) {
+
+                Aeroflot temp = flights[j];
+                flights[j] = flights[j + 1];
+                flights[j + 1] = temp;
+            }
+        }
+    }
+
+    cout << endl;
+    cout << "--------------------------------------------------------------------------" << endl;
+    cout << "|  Номер рейса  |  Отправление  |  Назначение  |   Прибытие   |   Отправление   |  Секция  |" << endl;
+    cout << "--------------------------------------------------------------------------" << endl;
+
+    for (int i = 0; i < MAX_FLIGHTS; ++i) {
+        cout << "| " << flights[i].flightNumber << "\t\t| " << flights[i].departureCity << "\t| "
+            << flights[i].destinationCity << "\t| " << flights[i].arrivalTime << "\t\t| "
+            << flights[i].departureTime << "\t\t| " << flights[i].registrationSectionNumber << "\t|" << endl;
+    }
+
+    cout << "--------------------------------------------------------------------------" << endl;
+
+    return 0;
+}
