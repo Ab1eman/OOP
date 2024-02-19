@@ -1,0 +1,56 @@
+#include <iostream>
+#include <ctime>
+#include <iomanip>
+
+using namespace std;
+
+class Timer {
+private:
+    int seconds;
+
+public:
+
+    Timer(int sec) : seconds(sec) {}
+
+    Timer(const std::string& timeString) {
+        int minutes, seconds;
+        sscanf_s(timeString.c_str(), "%d:%d", &minutes, &seconds);
+        this->seconds = minutes * 60 + seconds;
+    }
+
+    Timer(int min, int sec) : seconds(min * 60 + sec) {}
+
+    void run() {
+        clock_t start = clock();
+
+        while (seconds > 0) {
+            clock_t current = clock();
+            double elapsedSeconds = static_cast<double>(current - start) / CLOCKS_PER_SEC;
+
+            if (elapsedSeconds >= 1.0) {
+                seconds--;
+                start = current;
+                int minutes = seconds / 60;
+                int remainingSeconds = seconds % 60;
+
+                cout << setfill('0') << setw(2) << minutes << ":"
+                    << setfill('0') << setw(2) << remainingSeconds << endl;
+            }
+        }
+
+        cout << "Время вышло!" << endl;
+    }
+};
+
+int main() {
+    setlocale(LC_ALL, "rus");
+
+    Timer timer1(5);
+    timer1.run();
+
+    Timer timer2("00:10");
+    timer2.run();
+
+    Timer timer3(0, 10);
+    timer3.run();
+}
