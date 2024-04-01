@@ -1,0 +1,51 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+class Currency {
+public:
+    virtual double toRuble(double amount) const = 0;
+    virtual void display(double amount) const = 0;
+    virtual ~Currency() {}
+};
+
+class Dollar : public Currency {
+public:
+    double toRuble(double amount) const override {
+        return amount * 90.95;
+    }
+
+    void display(double amount) const override {
+        cout << "$" << fixed << setprecision(2) << amount;
+    }
+};
+
+class Euro : public Currency {
+public:
+    double toRuble(double amount) const override {
+        return amount * 99.52;
+    }
+
+    void display(double amount) const override {
+        cout << "€" << fixed << setprecision(2) << amount;
+    }
+};
+
+int main() {
+    setlocale(LC_ALL, "rus");
+    Dollar dollar;
+    Euro euro;
+
+    double amountInDollars = 1225;
+    double amountInEuros = 1500;
+
+    cout << "Значение в Долларах: ";
+    dollar.display(amountInDollars);
+    cout << " = " << dollar.toRuble(amountInDollars) << " Рублей" << endl;
+
+    cout << "Значение в Евро: ";
+    euro.display(amountInEuros);
+    cout << " = " << euro.toRuble(amountInEuros) << " Рублей" << endl;
+
+    return 0;
+}
