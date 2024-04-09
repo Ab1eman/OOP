@@ -1,0 +1,56 @@
+#include <iostream>
+#include <random>
+
+template<typename T, size_t N>
+class ArrayPair {
+private:
+    T array1[N];
+    T array2[N];
+
+public:
+    ArrayPair() {
+        std::random_device rd;
+        std::mt19937 mersenne(rd());
+        for (size_t i = 0; i < N; ++i) {
+            array1[i] = mersenne();
+        }
+        for (size_t i = 0; i < N; ++i) {
+            array2[i] = mersenne();
+        }
+    }
+
+    void printArrays() {
+        std::cout << "Массив №1: " << std::endl;
+        for (size_t i = 0; i < N; ++i) {
+            std::cout << array1[i] << " ";
+        }
+        std::cout << std::endl;
+        std::cout << "Массив №2: " << std::endl;
+        for (size_t i = 0; i < N; ++i) {
+            std::cout << array2[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    T sum() const {
+        T total = 0;
+        for (size_t i = 0; i < N; ++i) {
+            total += array1[i];
+            total += array2[i];
+        }
+        return total;
+    }
+};
+
+int main() {
+    setlocale(LC_ALL, "rus");
+    ArrayPair<int, 5> intArrays;
+    intArrays.printArrays();
+    std::cout << "Сумма целых чисел: " << intArrays.sum() << std::endl;
+
+    ArrayPair<double, 4> doubleArrays;
+    doubleArrays.printArrays();
+    std::cout << "Сумма чисел с плавающей точкой: " << doubleArrays.sum() << std::endl;
+
+    return 0;
+}
